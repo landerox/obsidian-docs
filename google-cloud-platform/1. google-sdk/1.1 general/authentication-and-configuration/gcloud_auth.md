@@ -1,46 +1,47 @@
-File: [[gcloud_auth.md]]
-Labels: #gcp #auth #config
-Description: Commands to authenticate with GCP and configure your CLI (`gcloud auth`, `gcloud config`).
-Related to: [[gcloud_projects.md]], [[gcloud_billing.md]]
 
-###### **Log in with your Google Account**
+File: [[gcloud_auth.md]]
+Etiquetas: #gcp #auth #config
+Descripción: Comandos para autenticarse en GCP y configurar tu CLI (`gcloud auth`, `gcloud config`).  
+Relacionado con: [[gcloud_projects.md]], [[gcloud_billing.md]]
+
+###### **Iniciar sesión con tu cuenta de Google**
 
 ```bash
 gcloud auth login
 ```
 
-- Opens a browser window for authentication.
-- Useful for interacting with GCP from the CLI.
+- Abre una ventana del navegador para autenticarte.
+- Útil para interactuar con GCP desde la CLI.
 
-###### **List authenticated accounts**
+###### **Listar cuentas autenticadas**
 
 ```bash
 gcloud auth list
 ```
 
-- Displays the authenticated accounts on your system.
-- Highlights the active account.
+- Muestra las cuentas autenticadas en tu sistema.
+- Resalta cuál es la cuenta activa.
 
-###### **Set an active account**
+###### **Establecer una cuenta activa**
 
 ```bash
 gcloud config set account user@google.com
 ```
 
-Sets the active account used by `gcloud` commands.
+Cambia la cuenta activa utilizada por los comandos de `gcloud`.
 
-###### **Application default authentication**
+###### **Autenticación predeterminada para aplicaciones**
 
 ```bash
 gcloud auth application-default login
 ```
 
-- Used to authenticate applications that use GCP client libraries.
-- Generates credentials at `~/.config/gcloud/application_default_credentials.json`.
+- Se utiliza para autenticar aplicaciones que usan bibliotecas cliente de GCP.
+- Genera credenciales en `~/.config/gcloud/application_default_credentials.json`.
 
-**Note**: This method is primarily useful for development environments. In production, using service account credentials is recommended.
+**Nota**: Este método es útil principalmente para entornos de desarrollo. En producción, se recomienda usar credenciales de cuentas de servicio.
 
-###### **Set credentials for applications**
+###### **Establecer credenciales para aplicaciones**
 
 Linux/MacOS:
 
@@ -52,76 +53,76 @@ export GOOGLE_APPLICATION_CREDENTIALS="~/.config/gcloud/application_default_cred
 Windows (CMD):
 
 ```bash
-set export GOOGLE_APPLICATION_CREDENTIALS="C:\Users\YourUser\.config\gcloud\application_default_credentials.json"
+set export GOOGLE_APPLICATION_CREDENTIALS="C:\Users\TuUsuario\.config\gcloud\application_default_credentials.json"
 ```
 
 Windows (PowerShell):
 
 ```bash
-$env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\YourUser\.config\gcloud\application_default_credentials.json"
+$env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\TuUsuario\.config\gcloud\application_default_credentials.json"
 ```
 
-##### **Revoke authentication**
+##### **Revocar autenticación**
 
-For user accounts:
+Para cuentas de usuario:
 
 ```bash
 gcloud auth revoke user@google.com
 ```
 
-Revokes access for a specific account.
+Revoca el acceso de una cuenta específica.
 
-Revoke all accounts:
+Revocar todas las cuentas:
 
 ```bash
 gcloud auth revoke --all
 ```
 
-###### **Manually obtain an access token**
+###### **Obtener un token de acceso manualmente**
 
 ```bash
 gcloud auth print-access-token
 ```
 
-- Generates a token you can use to make API requests directly.
-- Useful for quick tests or debugging.
+- Genera un token que puedes usar para realizar solicitudes API directamente.
+- Útil para pruebas rápidas o depuración.
 
-###### **Configuration profiles with `gcloud`**
+###### **Configuración de perfiles con `gcloud`**
 
-Create a new configuration:
+Crear una nueva configuración:
 
 ```bash
 gcloud config configurations create new-config
 ```
 
-###### **Switch between configurations:**
+###### **Cambiar entre configuraciones:**
 
 ```bash
 gcloud config configurations activate config-name
 ```
 
-###### **List existing configurations:**
+###### **Listar configuraciones existentes:**
 
 ```bash
 gcloud config configurations list
 ```
 
-###### **Delete a configuration:**
+###### **Eliminar una configuración:**
 
 ```bash
 gcloud config configurations delete config-name
 ```
 
-##### **Related Links**
+##### **Enlaces Relacionados**
 
-- [[gcloud_projects.md]]: Learn how to manage projects and accounts in GCP.
-- [[gcloud_billing.md]]: Setup and manage billing accounts associated with your projects.
-- [[gcloud_iam_roles.md]]: Information about roles and permissions in GCP.
+- [[gcloud_projects.md]]: Aprende cómo gestionar proyectos y cuentas en GCP.
+- [[gcloud_billing.md]]: Configuración y gestión de cuentas de facturación asociadas a tus proyectos.
+- [[gcloud_iam_roles.md]]: Información sobre roles y permisos en GCP.
 
 ---
 
-##### **Notes**
+##### **Notas**
 
-- **Required permissions:** Ensure you have the necessary permissions to run authentication and configuration commands, such as `roles/iam.serviceAccountUser` or `roles/owner`.
-- **Billing accounts:** Authentication credentials are required to work with paid resources associated with billing accounts.
-- **Access tokens:** Tokens manually generated with `gcloud auth print-access-token` have a limited lifespan (usually 1 hour) and should not be used in production.
+- **Permisos necesarios:** Asegúrate de tener los permisos adecuados para ejecutar comandos de autenticación y configuración, como `roles/iam.serviceAccountUser` o `roles/owner`.
+- **Cuentas de facturación:** Las credenciales de autenticación son necesarias para trabajar con recursos pagos asociados a cuentas de facturación.
+- **Tokens de acceso:** Los tokens generados manualmente con `gcloud auth print-access-token` tienen una duración limitada (generalmente 1 hora) y no deben ser usados en producción.
