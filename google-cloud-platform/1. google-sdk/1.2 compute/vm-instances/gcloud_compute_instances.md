@@ -3,193 +3,169 @@
 **Description:** Manage virtual machine instances in Google Cloud with essential commands like `gcloud compute instances create` and `gcloud compute ssh`.
 **Related to:** [[gcloud_compute_disks]]
 
-#### **Gestión de Instancias de VM en Google Cloud**
+## **VM Instance Management in Google Cloud**
 
-##### **Listar instancias existentes**
+### **List Existing Instances**
 
 ```bash
 gcloud compute instances list
 ```
 
-- Muestra una lista de todas las instancias de VM en tu proyecto.
-- Incluye detalles como el nombre, zona, estado, tipo de máquina y dirección IP.
+- Displays a list of all VM instances in your project.
+- Includes details such as name, zone, status, machine type, and IP address.
 
-##### **Crear una instancia de VM**
-
-```bash
-gcloud compute instances create instance-name \
-    --zone=zone-name \
-    --machine-type=machine-type \
-    --image-family=ubuntu-2004-lts \
-    --image-project=ubuntu-os-cloud \
-    --boot-disk-size=size-in-gb
-```
-
-- **`instance-name`:** Nombre de la instancia.
-- **`zone-name`:** Zona donde se creará la instancia (por ejemplo, `us-central1-a`).
-- **`machine-type`:** Tipo de máquina (como `n1-standard-1`, `e2-medium`, etc.).
-- **`image-family`:** Familia de imágenes base (por ejemplo, `ubuntu-2004-lts`).
-- **`image-project`:** Proyecto de imagen base (como `ubuntu-os-cloud` para imágenes de Ubuntu).
-- **`boot-disk-size`:** Tamaño del disco de arranque en GB.
-
-##### **Conectarse a una instancia con SSH**
+### **Create a VM Instance**
 
 ```bash
-gcloud compute ssh instance-name \
-    --zone=zone-name
+gcloud compute instances create instance-name     --zone=zone-name     --machine-type=machine-type     --image-family=ubuntu-2004-lts     --image-project=ubuntu-os-cloud     --boot-disk-size=size-in-gb
 ```
 
-- Abre una conexión SSH a la instancia especificada.
-- Configura automáticamente las claves SSH necesarias.
+- **`instance-name`:** Name of the instance.
+- **`zone-name`:** Zone where the instance will be created (e.g., `us-central1-a`).
+- **`machine-type`:** Machine type (e.g., `n1-standard-1`, `e2-medium`, etc.).
+- **`image-family`:** Base image family (e.g., `ubuntu-2004-lts`).
+- **`image-project`:** Base image project (e.g., `ubuntu-os-cloud` for Ubuntu images).
+- **`boot-disk-size`:** Boot disk size in GB.
 
-###### **Opciones adicionales:**
-
-###### **Usar una clave SSH específica:**
+### **Connect to an Instance via SSH**
 
 ```bash
-gcloud compute ssh instance-name \
-    --zone=zone-name \
-    --ssh-key-file=/path/to/key
+gcloud compute ssh instance-name     --zone=zone-name
 ```
 
-###### **Especificar un usuario:**
+- Opens an SSH connection to the specified instance.
+- Automatically sets up the necessary SSH keys.
+
+## **Additional Options:**
+
+### **Use a Specific SSH Key:**
 
 ```bash
-gcloud compute ssh username@instance-name \
-    --zone=zone-name
+gcloud compute ssh instance-name     --zone=zone-name     --ssh-key-file=/path/to/key
 ```
 
-##### **Detener una instancia**
+### **Specify a User:**
 
 ```bash
-gcloud compute instances stop instance-name \
-    --zone=zone-name
+gcloud compute ssh username@instance-name     --zone=zone-name
 ```
 
-- Detiene una instancia para ahorrar costos.
-- Las instancias detenidas siguen incurriendo en costos de disco.
-
-##### **Iniciar una instancia detenida**
+### **Stop an Instance**
 
 ```bash
-gcloud compute instances start instance-name \
-    --zone=zone-name
-Inicia una instancia previamente detenida.
+gcloud compute instances stop instance-name     --zone=zone-name
 ```
 
-##### **Reiniciar una instancia**
+- Stops an instance to save costs.
+- Stopped instances still incur disk costs.
+
+### **Start a Stopped Instance**
 
 ```bash
-gcloud compute instances reset instance-name \
-    --zone=zone-name
+gcloud compute instances start instance-name     --zone=zone-name
 ```
 
-- Reinicia una instancia de manera forzada.
-- **Nota:** Esta acción es similar a presionar el botón de reinicio físico en una máquina.
+- Starts a previously stopped instance.
 
-##### **Eliminar una instancia**
+### **Restart an Instance**
 
 ```bash
-gcloud compute instances delete instance-name \
-    --zone=zone-name
+gcloud compute instances reset instance-name     --zone=zone-name
 ```
 
-- Borra una instancia permanentemente.
-- **Nota:** Los discos asociados a la instancia también se eliminan, a menos que se especifique lo contrario.
+- Forces a restart of an instance.
+- **Note:** This is similar to pressing the physical reset button on a machine.
 
-##### **Mantener discos al eliminar la instancia:**
+### **Delete an Instance**
 
 ```bash
-gcloud compute instances delete instance-name \ --zone=zone-name \ --keep-disks=all
+gcloud compute instances delete instance-name     --zone=zone-name
 ```
 
-#### **Administración de Discos en Instancias**
+- Permanently deletes an instance.
+- **Note:** Disks associated with the instance are also deleted unless specified otherwise.
 
-##### **Adjuntar un disco existente**
+### **Keep Disks When Deleting the Instance:**
 
 ```bash
-gcloud compute instances attach-disk instance-name \
-    --disk=disk-name \
-    --zone=zone-name
+gcloud compute instances delete instance-name     --zone=zone-name     --keep-disks=all
 ```
 
-- Adjunta un disco existente a una instancia.
+## **Disk Management for Instances**
 
-##### **Desadjuntar un disco**
+### **Attach an Existing Disk**
 
 ```bash
-gcloud compute instances detach-disk instance-name \
-    --disk=disk-name \
-    --zone=zone-name
+gcloud compute instances attach-disk instance-name     --disk=disk-name     --zone=zone-name
 ```
 
-- Desconecta un disco de una instancia.
+- Attaches an existing disk to an instance.
 
-#### **Configuración de Red y Firewall**
-
-##### **Listar direcciones IP de las instancias**
+### **Detach a Disk**
 
 ```bash
-gcloud compute instances list \
-    --format="table(name, networkInterfaces[0].accessConfigs[0].natIP)"
+gcloud compute instances detach-disk instance-name     --disk=disk-name     --zone=zone-name
 ```
 
-- Muestra las direcciones IP externas de todas las instancias.
+- Disconnects a disk from an instance.
 
-##### **Asignar una IP estática**
+## **Network and Firewall Configuration**
+
+### **List Instance IP Addresses**
 
 ```bash
-gcloud compute addresses create static-ip-name \
-    --region=region-name
+gcloud compute instances list     --format="table(name, networkInterfaces[0].accessConfigs[0].natIP)"
 ```
 
-Reserva una IP estática en la región especificada.
+- Displays the external IP addresses of all instances.
+
+### **Assign a Static IP**
 
 ```bash
-gcloud compute instances network-interfaces update instance-name \
-    --zone=zone-name \
-    --addresses=static-ip-name
+gcloud compute addresses create static-ip-name     --region=region-name
 ```
 
-- Asigna la IP estática a una instancia.
-
-#### **Snapshots de Discos de Instancias**
-
-##### **Crear un snapshot del disco de arranque**
+- Reserves a static IP in the specified region.
 
 ```bash
-gcloud compute disks snapshot instance-name \
-    --zone=zone-name \
-    --snapshot-names=snapshot-name
+gcloud compute instances network-interfaces update instance-name     --zone=zone-name     --addresses=static-ip-name
 ```
 
-- Crea un snapshot del disco de arranque de una instancia.
+- Assigns the static IP to an instance.
 
-##### **Automatización con Scripts**
+## **Instance Disk Snapshots**
 
-Ejecutar un comando en la instancia
+### **Create a Boot Disk Snapshot**
 
 ```bash
-gcloud compute ssh instance-name \
-    --zone=zone-name \
-    --command="comando-a-ejecutar"
+gcloud compute disks snapshot instance-name     --zone=zone-name     --snapshot-names=snapshot-name
 ```
 
-- Ejecuta un comando específico en una instancia vía SSH.
+- Creates a snapshot of an instance's boot disk.
+
+### **Automate with Scripts**
+
+Run a command on the instance:
+
+```bash
+gcloud compute ssh instance-name     --zone=zone-name     --command="command-to-run"
+```
+
+- Runs a specific command on an instance via SSH.
 
 ---
 
-##### **Enlaces Relacionados**
+### **Related Links**
 
-- [[gcloud_compute_disks]]: Comandos para gestionar discos e imágenes asociados a instancias.
-- [[gcloud_iam_roles.md]]: Información sobre permisos necesarios para trabajar con instancias de VM.
-- [[gcloud_networking.md]]: Configuración avanzada de redes y firewalls en GCP.
+- [[gcloud_compute_disks]]: Commands to manage disks and images associated with instances.
+- [[gcloud_iam_roles.md]]: Information on permissions required to work with VM instances.
+- [[gcloud_networking.md]]: Advanced network and firewall configuration in GCP.
 
 ---
 
-##### **Notas**
+### **Notes**
 
-- **Permisos necesarios:** Asegúrate de tener permisos como `roles/compute.admin` o específicos como `roles/compute.instanceAdmin`.
-- **Cuidado con los costos:** Las instancias en ejecución generan costos continuos. Detén las que no estés utilizando.
-- **Zonas y regiones:** Crea instancias en zonas cercanas a tus usuarios finales para minimizar la latencia.
-- **Gestión de claves SSH:** Las claves se administran automáticamente, pero puedes personalizarlas según sea necesario.
+- **Required Permissions:** Ensure you have permissions like `roles/compute.admin` or specific ones like `roles/compute.instanceAdmin`.
+- **Cost Awareness:** Running instances incur continuous costs. Stop instances that you're not using.
+- **Zones and Regions:** Create instances in zones close to your end users to minimize latency.
+- **SSH Key Management:** Keys are automatically managed but can be customized as needed.

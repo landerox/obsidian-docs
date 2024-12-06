@@ -3,195 +3,175 @@
 **Description:** Commands to manage disks (`gcloud compute disks list`) and images (`gcloud compute images create`).
 **Related to:** [[gcloud_compute_instances]]
 
-#### **Gestión de Discos en Google Cloud**
+## **Disk Management in Google Cloud**
 
-##### **Listar discos existentes**
+### **List Existing Disks**
 
 ```bash
 gcloud compute disks list
 ```
 
-- Muestra una lista de todos los discos disponibles en tu proyecto.
-- Incluye detalles como el nombre, tamaño, tipo y la región donde se encuentran.
+- Displays a list of all available disks in your project.
+- Includes details such as the name, size, type, and the region where they are located.
 
-##### **Crear un disco**
-
-```bash
-gcloud compute disks create disk-name \
-    --size=size-in-gb \
-    --type=pd-standard \
-    --zone=zone-name
-```
-
-- **`disk-name`:** Nombre del disco que deseas crear.
-- **`size-in-gb`:** Tamaño del disco en GB (por ejemplo, 100 para un disco de 100 GB).
-- **`pd-standard`:** Tipo de disco. Opciones comunes:
-  - `pd-standard` (HDD estándar).
-  - `pd-ssd` (SSD de alto rendimiento).
-- **`zone-name`:** Zona donde se creará el disco (por ejemplo, `us-central1-a`).
-
-##### **Eliminar un disco**
+### **Create a Disk**
 
 ```bash
-gcloud compute disks delete disk-name \
-    --zone=zone-name
+gcloud compute disks create disk-name     --size=size-in-gb     --type=pd-standard     --zone=zone-name
 ```
 
-- Borra un disco especificado por su nombre y zona.
+- **`disk-name`:** Name of the disk you want to create.
+- **`size-in-gb`:** Disk size in GB (e.g., 100 for a 100 GB disk).
+- **`pd-standard`:** Disk type. Common options:
+  - `pd-standard` (Standard HDD).
+  - `pd-ssd` (High-performance SSD).
+- **`zone-name`:** Zone where the disk will be created (e.g., `us-central1-a`).
 
-##### **Redimensionar un disco**
+### **Delete a Disk**
 
 ```bash
-gcloud compute disks resize disk-name \
-    --size=new-size-in-gb \
-    --zone=zone-name
+gcloud compute disks delete disk-name     --zone=zone-name
 ```
 
-- Cambia el tamaño de un disco existente.
-- **Nota:** Este cambio solo afecta al disco; también deberás extender el sistema de archivos en la instancia que lo use.
+- Deletes a disk specified by its name and zone.
 
-##### **Clonar un disco**
+### **Resize a Disk**
 
 ```bash
-gcloud compute disks create new-disk-name \
-    --source-disk=source-disk-name \
-    --source-disk-zone=source-zone \
-    --zone=destination-zone
+gcloud compute disks resize disk-name     --size=new-size-in-gb     --zone=zone-name
 ```
 
-- Crea un nuevo disco basado en uno existente.
-- Útil para realizar copias o backups.
+- Changes the size of an existing disk.
+- **Note:** This change only affects the disk; you must also extend the file system on the instance using it.
 
-#### **Gestión de Imágenes en Google Cloud**
+### **Clone a Disk**
 
-##### **Listar imágenes disponibles**
+```bash
+gcloud compute disks create new-disk-name     --source-disk=source-disk-name     --source-disk-zone=source-zone     --zone=destination-zone
+```
+
+- Creates a new disk based on an existing one.
+- Useful for making copies or backups.
+
+## **Image Management in Google Cloud**
+
+### **List Available Images**
 
 ```bash
 gcloud compute images list
 ```
 
-Muestra todas las imágenes disponibles, tanto públicas como privadas (en tu proyecto).
+- Displays all available images, both public and private (in your project).
 
-##### **Crear una imagen desde un disco**
-
-```bash
-gcloud compute images create image-name \
-    --source-disk=source-disk-name \
-    --source-disk-zone=source-zone
-```
-
-- Crea una imagen basada en un disco existente.
-- **`image-name`:** Nombre de la imagen que deseas crear.
-- **`source-disk-name`:** Nombre del disco fuente.
-- **`source-zone`:** Zona donde se encuentra el disco.
-
-##### **Crear una imagen desde un archivo de disco (custom image)**
+### **Create an Image from a Disk**
 
 ```bash
-gcloud compute images create image-name \
-    --source-uri=gs://bucket-name/path-to-image-file
+gcloud compute images create image-name     --source-disk=source-disk-name     --source-disk-zone=source-zone
 ```
 
-- Crea una imagen personalizada desde un archivo almacenado en un bucket de Google Cloud Storage.
+- Creates an image based on an existing disk.
+- **`image-name`:** Name of the image you want to create.
+- **`source-disk-name`:** Name of the source disk.
+- **`source-zone`:** Zone where the disk is located.
 
-##### **Eliminar una imagen**
+### **Create an Image from a Disk File (Custom Image)**
+
+```bash
+gcloud compute images create image-name     --source-uri=gs://bucket-name/path-to-image-file
+```
+
+- Creates a custom image from a file stored in a Google Cloud Storage bucket.
+
+### **Delete an Image**
 
 ```bash
 gcloud compute images delete image-name
 ```
 
-- Borra una imagen especificada por su nombre.
+- Deletes an image specified by its name.
 
-##### **Exportar una imagen a un archivo**
-
-```bash
-gcloud compute images export \
-    --destination-uri=gs://bucket-name/path-to-exported-image \
-    --image=image-name
-```
-
-- Exporta una imagen a un archivo en Google Cloud Storage.
-- **`destination-uri`:** Ruta en Cloud Storage donde se guardará el archivo.
-
-#### **Adjuntar y Desadjuntar Discos**
-
-##### **Adjuntar un disco a una instancia**
+### **Export an Image to a File**
 
 ```bash
-gcloud compute instances attach-disk instance-name \
-    --disk=disk-name \
-    --zone=zone-name
+gcloud compute images export     --destination-uri=gs://bucket-name/path-to-exported-image     --image=image-name
 ```
 
-- Conecta un disco existente a una instancia.
-- **Nota:** El disco debe estar en la misma zona que la instancia.
+- Exports an image to a file in Google Cloud Storage.
+- **`destination-uri`:** Path in Cloud Storage where the file will be saved.
 
-##### **Desadjuntar un disco de una instancia**
+## **Attach and Detach Disks**
+
+### **Attach a Disk to an Instance**
 
 ```bash
-gcloud compute instances detach-disk instance-name \
-    --disk=disk-name \
-    --zone=zone-name
+gcloud compute instances attach-disk instance-name     --disk=disk-name     --zone=zone-name
 ```
 
-- Desconecta un disco de una instancia sin eliminarlo.
+- Connects an existing disk to an instance.
+- **Note:** The disk must be in the same zone as the instance.
 
-#### **Snapshot de Discos**
-
-##### **Crear un snapshot**
+### **Detach a Disk from an Instance**
 
 ```bash
-gcloud compute disks snapshot disk-name \
-    --snapshot-names=snapshot-name \
-    --zone=zone-name
+gcloud compute instances detach-disk instance-name     --disk=disk-name     --zone=zone-name
 ```
 
-- Crea un snapshot (copia de seguridad) de un disco existente.
+- Disconnects a disk from an instance without deleting it.
 
-##### **Listar snapshots**
+## **Disk Snapshots**
+
+### **Create a Snapshot**
+
+```bash
+gcloud compute disks snapshot disk-name     --snapshot-names=snapshot-name     --zone=zone-name
+```
+
+- Creates a snapshot (backup) of an existing disk.
+
+### **List Snapshots**
 
 ```bash
 gcloud compute snapshots list
 ```
 
-- Muestra una lista de todos los snapshots disponibles en tu proyecto.
+- Displays a list of all snapshots available in your project.
 
-##### **Eliminar un snapshot**
+### **Delete a Snapshot**
 
 ```bash
 gcloud compute snapshots delete snapshot-name
 ```
 
-- Borra un snapshot especificado por su nombre.
+- Deletes a snapshot specified by its name.
 
-##### **Buenas Prácticas**
+### **Best Practices**
 
-1. **Nombres descriptivos:** Usa nombres claros para discos e imágenes, como `web-server-disk` o `backup-image-2023-01`.
-2. **Backups regulares:** Configura snapshots automáticos para discos críticos.
-3. **Optimización de costos:** Revisa periódicamente discos y snapshots para eliminar recursos no utilizados.
-4. **Zonas y regiones:** Asegúrate de crear discos y snapshots en regiones cercanas a tus usuarios o servicios.
-
----
-
-##### **Enlaces Relacionados**
-
-- [[gcloud_compute_instances]]: Comandos para gestionar instancias de máquinas virtuales en Google Cloud.
-- [[gcloud_storage.md]]: Guía para trabajar con buckets y objetos en Cloud Storage.
-- [[gcloud_iam_roles.md]]: Información sobre roles y permisos necesarios para administrar recursos en GCP.
+1. **Descriptive Names:** Use clear names for disks and images, like `web-server-disk` or `backup-image-2023-01`.
+2. **Regular Backups:** Set up automatic snapshots for critical disks.
+3. **Cost Optimization:** Periodically review disks and snapshots to remove unused resources.
+4. **Zones and Regions:** Ensure disks and snapshots are created in regions close to your users or services.
 
 ---
 
-##### **Notas**
+### **Related Links**
 
-- **Permisos necesarios:**
-  - Para gestionar discos: asegúrate de tener permisos como `roles/compute.admin` o específicos como `roles/compute.storageAdmin`.
-  - Para snapshots e imágenes: necesitarás permisos como `roles/compute.imageUser` o `roles/compute.snapshotUser`.
+- [[gcloud_compute_instances]]: Commands to manage virtual machine instances in Google Cloud.
+- [[gcloud_storage.md]]: Guide for working with buckets and objects in Cloud Storage.
+- [[gcloud_iam_roles.md]]: Information on roles and permissions required to manage resources in GCP.
 
-- **Cuidado con los costos:**
-  - Discos no utilizados y snapshots antiguos pueden generar costos innecesarios. Configura políticas de limpieza o utiliza herramientas como "Recomendaciones de Google Cloud" para optimizar recursos.
+---
 
-- **Snapshots e imágenes en producción:**
-  - Configura snapshots automáticos para discos críticos y almacena imágenes personalizadas para entornos reproducibles.
+### **Notes**
 
-- **Zonas y regiones:**
-  - Los discos, snapshots e imágenes deben estar en la misma región o zona que los recursos que los utilizarán para evitar latencias o errores de conexión.
+- **Required Permissions:**
+  - To manage disks: ensure you have permissions like `roles/compute.admin` or specific ones like `roles/compute.storageAdmin`.
+  - For snapshots and images: you need permissions like `roles/compute.imageUser` or `roles/compute.snapshotUser`.
+
+- **Cost Awareness:**
+  - Unused disks and old snapshots can incur unnecessary costs. Set up cleanup policies or use tools like "Google Cloud Recommendations" to optimize resources.
+
+- **Snapshots and Images in Production:**
+  - Configure automatic snapshots for critical disks and store custom images for reproducible environments.
+
+- **Zones and Regions:**
+  - Disks, snapshots, and images should be in the same region or zone as the resources using them to avoid latency or connection errors.
