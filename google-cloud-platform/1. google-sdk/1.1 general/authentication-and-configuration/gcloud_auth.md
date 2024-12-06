@@ -1,4 +1,4 @@
-**File:** [[gcloud_auth.md]]
+
 **Tags:** #gcp #auth #config
 **Description:** Commands to authenticate to GCP and configure your CLI (`gcloud auth`, `gcloud config`).
 **Related to:** [[gcloud_projects.md]], [[gcloud_billing.md]]

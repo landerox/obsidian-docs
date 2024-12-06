@@ -1,4 +1,4 @@
-**File:** [[gcloud_iam.md]]
+
 **Tags:** #gcp #projects
 **Description:** Project and account management in GCP (`gcloud projects list`, `gcloud organizations`).
 **Related to:** [[gcloud_auth.md]], [[gcloud_billing.md]]

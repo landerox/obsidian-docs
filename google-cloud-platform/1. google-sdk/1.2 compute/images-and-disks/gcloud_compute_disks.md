@@ -1,4 +1,4 @@
-**File:** [[gcloud_compute_disks.md]]
+
 **Tags:** #gcp #compute #storage
 **Description:** Commands to manage disks (`gcloud compute disks list`) and images (`gcloud compute images create`).
 **Related to:** [[gcloud_compute_instances]]

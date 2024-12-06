@@ -1,4 +1,4 @@
-**File:** [[gcloud_iam.md]]
+
 **Tags:** #gcp #iam #roles
 **Description:** Commands to manage roles, permissions, and access policies (`gcloud iam roles`, `gcloud iam policy`).
 **Related to:** [[gcloud_projects.md]], [[gcloud_auth.md]]

@@ -1,4 +1,4 @@
-**File:** [[gcloud_compute_disks.md]]
+
 **Tags:** #gcp #compute #vm
 **Description:** Manage virtual machine instances in Google Cloud with essential commands like `gcloud compute instances create` and `gcloud compute ssh`.
 **Related to:** [[gcloud_compute_disks]]

@@ -1,4 +1,4 @@
-**File:** [[gcloud_billing.md]]
+
 **Tags:** #gcp #billing
 **Description:** Setup and management of billing accounts (`gcloud billing accounts list`, `gcloud billing projects link`).
 **Related to:** [[gcloud_projects.md]], [[gcloud_auth.md]]
