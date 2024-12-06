@@ -1,51 +1,51 @@
+**File:** [[gcloud_billing.md]]
+**Tags:** #gcp #billing
+**Description:** Setup and management of billing accounts (`gcloud billing accounts list`, `gcloud billing projects link`).
+**Related to:** [[gcloud_projects.md]], [[gcloud_auth.md]]
 
-Etiquetas: #gcp #billing
-Descripción: Configuración y gestión de cuentas de facturación (`gcloud billing accounts list`, `gcloud billing projects link`).
-Relacionado con: [[gcloud_projects.md]], [[gcloud_auth.md]]
-
-##### **Listar cuentas de facturación disponibles**
+### **List available billing accounts**
 
 ```bash
 gcloud billing accounts list
 ```
 
-Este comando muestra las cuentas de facturación disponibles asociadas con tu usuario o tu organización.
+This command shows the billing accounts available to your user or organization.
 
-##### **Consultar la información de una cuenta de facturación específica**
+### **View information for a specific billing account**
 
 ```bash
 gcloud billing accounts describe [ACCOUNT_ID]
 ```
 
-Reemplaza `[ACCOUNT_ID]` con el identificador de la cuenta.
+Replace `[ACCOUNT_ID]` with the identifier of the account.
 
-##### **Verificar si un proyecto tiene facturación habilitada**
+### **Check if a project has billing enabled**
 
 ```bash
 gcloud beta billing projects describe [PROJECT_ID]
 ```
 
-Reemplaza `[PROJECT_ID]` con el ID del proyecto.
+Replace `[PROJECT_ID]` with the project ID.
 
-##### **Vincular un proyecto a una cuenta de facturación**
+### **Link a project to a billing account**
 
-Este comando habilita la facturación en un proyecto al vincularlo con una cuenta de facturación.
+This command enables billing for a project by linking it to a billing account.
 
 ```bash
 gcloud beta billing projects link [PROJECT_ID] --billing-account [ACCOUNT_ID]
 ```
 
-##### **Deshabilitar la facturación de un proyecto**
+### **Disable billing for a project**
 
-Este comando deshabilita la facturación del proyecto.
+This command disables billing for a project.
 
 ```bash
 gcloud beta billing projects unlink [PROJECT_ID]
 ```
 
-**Nota:** Deshabilitar la facturación no elimina los recursos existentes, pero puede suspender servicios que dependan de ella.
+**Note:** Disabling billing does not delete existing resources, but it may suspend services that depend on it.
 
-##### **Crea una alerta de presupuesto con un límite definido:**
+### **Create a budget alert with a defined limit**
 
 ```bash
 gcloud billing budgets create \
@@ -55,30 +55,34 @@ gcloud billing budgets create \
     --threshold-rules "0.5=EMAIL,1.0=EMAIL"
 ```
 
-- **`--amount`**: Establece el límite de presupuesto (en dólares).
-- **`--threshold-rules`**: Define umbrales para alertas; en este caso, el 50% y el 100%.
+- **`--amount`**: Sets the budget limit (in dollars).
+- **`--threshold-rules`**: Defines thresholds for alerts; in this case, 50% and 100%.
 
-##### **Lista los presupuestos existentes:**
+### **List existing budgets**
 
 ```bash
 gcloud billing budgets list --billing-account [ACCOUNT_ID]
 ```
 
-##### **Eliminar un presupuesto:**
+### **Delete a budget**
 
 ```bash
 gcloud billing budgets delete [BUDGET_NAME]
 ```
 
-##### **Enlaces Relacionados**
+---
 
-- [[gcloud_auth.md]]: Aprende cómo autenticarse para gestionar cuentas de facturación.
-- [[gcloud_projects.md]]: Cómo crear y gestionar proyectos antes de vincularlos a cuentas de facturación.
-- [[gcloud_monitoring_alerts.md]]: Cómo configurar políticas de monitoreo y alertas relacionadas con costos.
+### **Related Links**
 
-##### **Notas**
+- **[gcloud_auth.md]**: Learn how to authenticate for managing billing accounts.
+- **[gcloud_projects.md]**: How to create and manage projects before linking them to billing accounts.
+- **[gcloud_monitoring_alerts.md]**: How to set up monitoring policies and alerts related to costs.
 
-- **Permisos necesarios**: Para gestionar cuentas de facturación, necesitas el rol `roles/billing.admin` o permisos específicos en la organización. Para vincular proyectos a cuentas de facturación, necesitas ser propietario o editor del proyecto.
-- **Cuentas de facturación**: Configura cuentas de facturación antes de vincularlas a los proyectos para habilitar recursos pagos.
-- **Límites de facturación**: Configura presupuestos y alertas de costos para evitar cargos inesperados utilizando los comandos de presupuestos.
-- **Documentación oficial**: Consulta la documentación oficial de facturación de Google Cloud para obtener más detalles y casos avanzados.
+---
+
+### **Notes**
+
+- **Required Permissions**: To manage billing accounts, you need the `roles/billing.admin` role or specific organization permissions. To link projects to billing accounts, you need to be the project owner or editor.
+- **Billing Accounts**: Configure billing accounts before linking them to projects to enable paid resources.
+- **Billing Limits**: Set budgets and cost alerts to avoid unexpected charges using the budget commands.
+- **Official Documentation**: Check the official Google Cloud billing documentation for more details and advanced use cases.

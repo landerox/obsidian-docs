@@ -1,16 +1,17 @@
-**Etiquetas:** #gcp #iam #roles
-**Descripción:** Comandos para gestionar roles, permisos, y políticas de acceso (`gcloud iam roles`, `gcloud iam policy`).
-Relacionado con: [[gcloud_projects.md]], [[gcloud_auth.md]]
+**File:** [[gcloud_iam.md]]
+**Tags:** #gcp #iam #roles
+**Description:** Commands to manage roles, permissions, and access policies (`gcloud iam roles`, `gcloud iam policy`).
+**Related to:** [[gcloud_projects.md]], [[gcloud_auth.md]]
 
-##### **Listar roles disponibles**
+### **List available roles**
 
 ```bash
 gcloud iam roles list
 ```
 
-Muestra todos los roles disponibles en tu proyecto u organización.
+Displays all the roles available in your project or organization.
 
-##### **Crear un rol personalizado**
+### **Create a custom role**
 
 ```bash
 gcloud iam roles create [ROLE_ID] \
@@ -21,22 +22,22 @@ gcloud iam roles create [ROLE_ID] \
     --stage="GA"
 ```
 
-[ROLE_ID]: Identificador único del rol.
-[PROJECT_ID]: Proyecto donde se creará el rol.
+- **[ROLE_ID]**: Unique identifier for the role.
+- **[PROJECT_ID]**: Project where the role will be created.
 
-##### **Actualizar un rol existente**
+### **Update an existing role**
 
 ```bash
 gcloud iam roles update [ROLE_ID] --project=[PROJECT_ID] --permissions="permission1,permission3"
 ```
 
-##### **Eliminar un rol personalizado**
+### **Delete a custom role**
 
 ```bash
 gcloud iam roles delete [ROLE_ID] --project=[PROJECT_ID]
 ```
 
-##### **Asignar un rol a un usuario**
+### **Assign a role to a user**
 
 ```bash
 gcloud projects add-iam-policy-binding [PROJECT_ID] \
@@ -44,7 +45,7 @@ gcloud projects add-iam-policy-binding [PROJECT_ID] \
     --role="roles/[ROLE_NAME]"
 ```
 
-##### **Revocar un rol de un usuario**
+### **Revoke a role from a user**
 
 ```bash
 gcloud projects remove-iam-policy-binding [PROJECT_ID] \
@@ -52,22 +53,26 @@ gcloud projects remove-iam-policy-binding [PROJECT_ID] \
     --role="roles/[ROLE_NAME]"
 ```
 
-##### **Visualizar políticas IAM**
+### **View IAM policies**
 
 ```bash
 gcloud projects get-iam-policy [PROJECT_ID]
 ```
 
-##### **Enlaces Relacionados**
+---
 
-- **[[gcloud_auth.md]]**: Aprende cómo autenticarse para acceder y gestionar políticas de IAM.
-- **[[gcloud_projects.md]]**: Cómo gestionar proyectos, lo cual es esencial para asignar roles y permisos.
-- **[[gcloud_iam_roles.md]]**: Información más detallada sobre roles predeterminados y personalizados en GCP.
-- **[[gcloud_iam_policies.md]]**: Gestión avanzada de políticas de acceso y auditorías.
-- **[[gcloud_monitoring_alerts.md]]**: Configuración de alertas para monitorear cambios en roles o políticas.
+### **Related Links**
 
-##### **Notas**
+- **[gcloud_auth.md]**: Learn how to authenticate for accessing and managing IAM policies.
+- **[gcloud_projects.md]**: How to manage projects, essential for assigning roles and permissions.
+- **[gcloud_iam_roles.md]**: More detailed information about default and custom roles in GCP.
+- **[gcloud_iam_policies.md]**: Advanced management of access policies and audits.
+- **[gcloud_monitoring_alerts.md]**: Configure alerts to monitor changes in roles or policies.
 
-- **Permisos necesarios:** Requiere roles/owner o roles/iam.admin para ejecutar comandos avanzados de IAM.
-- **Políticas organizacionales:** Configura políticas en niveles superiores como organizaciones o carpetas, si es necesario.
-- **Documentación oficial:** Consulta la documentación oficial para roles específicos y casos avanzados.
+---
+
+### **Notes**
+
+- **Required Permissions**: Requires `roles/owner` or `roles/iam.admin` to execute advanced IAM commands.
+- **Organizational Policies**: Configure policies at higher levels, such as organizations or folders, if necessary.
+- **Official Documentation**: Refer to the official documentation for specific roles and advanced use cases.

@@ -1,7 +1,7 @@
-
-**Etiquetas:** #gcp #compute #vm
-**Descripción:** Gestión de instancias de máquinas virtuales en Google Cloud con comandos esenciales como `gcloud compute instances create` y `gcloud compute ssh`.  
-**Relacionado con:** [[gcloud_compute_disks]]
+**File:** [[gcloud_compute_disks.md]]
+**Tags:** #gcp #compute #vm
+**Description:** Manage virtual machine instances in Google Cloud with essential commands like `gcloud compute instances create` and `gcloud compute ssh`.
+**Related to:** [[gcloud_compute_disks]]
 
 #### **Gestión de Instancias de VM en Google Cloud**
 

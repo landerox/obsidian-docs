@@ -1,6 +1,7 @@
-Etiquetas: #gcp #compute #storage
-Descripción: Comandos para manejar discos (`gcloud compute disks list`) e imágenes (`gcloud compute images create`).  
-Relacionado con: [[gcloud_compute_instances]]
+**File:** [[gcloud_compute_disks.md]]
+**Tags:** #gcp #compute #storage
+**Description:** Commands to manage disks (`gcloud compute disks list`) and images (`gcloud compute images create`).
+**Related to:** [[gcloud_compute_instances]]
 
 #### **Gestión de Discos en Google Cloud**
 

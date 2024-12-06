@@ -1,84 +1,88 @@
+**File:** [[gcloud_iam.md]]
+**Tags:** #gcp #projects
+**Description:** Project and account management in GCP (`gcloud projects list`, `gcloud organizations`).
+**Related to:** [[gcloud_auth.md]], [[gcloud_billing.md]]
 
-Etiquetas: #gcp #projects
-Descripción: Gestión de proyectos y cuentas en GCP (`gcloud projects list`, `gcloud organizations`).  
-Relacionado con: [[gcloud_auth.md]], [[gcloud_billing.md]]
+### **List Projects**
 
-##### **Listar Proyectos**
-
-Comando para ver todos los proyectos disponibles asociados con tu cuenta activa:
+Command to view all available projects associated with your active account:
 
 ```bash
 gcloud projects list
 ```
 
-Este comando muestra una tabla con:
+This command displays a table with:
 
-- **Project ID**: Identificador único del proyecto.
-- **Name**: Nombre del proyecto.
-- **Project Number**: Número único asignado por GCP.
-- **Lifecycle State**: Estado actual del proyecto (e.g., ACTIVE).
+- **Project ID**: Unique identifier for the project.
+- **Name**: Name of the project.
+- **Project Number**: Unique number assigned by GCP.
+- **Lifecycle State**: Current state of the project (e.g., ACTIVE).
 
-##### **Crear un Proyecto Nuevo**
+### **Create a New Project**
 
-Puedes crear un proyecto utilizando el siguiente comando:
+You can create a project using the following command:
 
 ```bash
 gcloud projects create [PROJECT_ID] --name="[PROJECT_NAME]"
 ```
 
-- `[PROJECT_ID]`: Un identificador único para el proyecto (minúsculas, números y guiones).
-- `[PROJECT_NAME]`: Nombre legible del proyecto.
+- **[PROJECT_ID]**: A unique identifier for the project (lowercase letters, numbers, and hyphens).
+- **[PROJECT_NAME]**: Human-readable name for the project.
 
-Asociar el proyecto a una cuenta de facturación específica:
+Associate the project with a specific billing account:
 
 ```bash
 gcloud projects create [PROJECT_ID] --name="[PROJECT_NAME]" --billing-account="[BILLING_ACCOUNT_ID]"
 ```
 
-##### **Cambiar el Proyecto Activo**
+### **Change the Active Project**
 
-Para trabajar con un proyecto específico, debes configurarlo como activo:
+To work with a specific project, you need to set it as active:
 
 ```bash
 gcloud config set project [PROJECT_ID]
 ```
 
-Puedes verificar qué proyecto está activo actualmente:
+You can check which project is currently active:
 
 ```bash
 gcloud config get-value project
 ```
 
-##### **Borrar un Proyecto**
+### **Delete a Project**
 
-Para eliminar un proyecto (recuerda que los datos y recursos se perderán):
+To delete a project (note that all data and resources will be lost):
 
 ```bash
 gcloud projects delete [PROJECT_ID]
 ```
 
-##### **Ver Organizaciones**
+### **View Organizations**
 
-Para listar todas las organizaciones asociadas a tu cuenta:
+To list all organizations associated with your account:
 
 ```bash
 gcloud organizations list
 ```
 
-##### **Mover un Proyecto a una Organización**
+### **Move a Project to an Organization**
 
-Si necesitas asignar un proyecto a una organización específica:
+If you need to assign a project to a specific organization:
 
 ```bash
 gcloud projects move [PROJECT_ID] --organization=[ORG_ID]
 ```
 
-##### **Enlaces Relacionados**
+---
 
-- [[gcloud_auth.md]]: Aprende cómo autenticarte y configurar tu cuenta en GCP antes de gestionar proyectos.
-- [[gcloud_billing.md]]: Configuración y gestión de cuentas de facturación asociadas a tus proyectos.
+### **Related Links**
 
-##### **Notas**
+- **[gcloud_auth.md]**: Learn how to authenticate and configure your GCP account before managing projects.
+- **[gcloud_billing.md]**: Configuration and management of billing accounts associated with your projects.
 
-- **Permisos necesarios**: Asegúrate de tener los permisos adecuados para gestionar proyectos, como `roles/resourcemanager.projectCreator` o `roles/owner`.
-- **Cuentas de facturación**: Todo proyecto debe estar asociado a una cuenta de facturación para habilitar recursos pagos.
+---
+
+### **Notes**
+
+- **Required Permissions**: Ensure you have the appropriate permissions to manage projects, such as `roles/resourcemanager.projectCreator` or `roles/owner`.
+- **Billing Accounts**: Every project must be associated with a billing account to enable paid resources.
